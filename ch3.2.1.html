@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>Test Suite</title>
+        <script type="text/javascript">
+            
+            function assert(value, desc) {
+                var li = document.createElement("li");
+                li.className = value ? "pass" : "fail";
+                li.appendChild(document.createTextNode(desc));
+                document.getElementById("results").appendChild(li);
+            };
+
+
+
+
+            function outer () {
+                assert (true, "------INSIDE OUTER, BEFORE a -----");
+                assert (typeof outer==='function', "outer() is in scope");
+                assert (typeof inner==='function', "inner() is in scope");
+                assert (typeof a==='number', "a is in scope");
+                assert (typeof b==='number', "b is in scope");
+                assert (typeof c==='number', "c is in scope");
+               
+                var a = 1;
+
+                assert (true, "------INSIDE OUTER, AFTER a -----");
+                assert (typeof outer==='function', "outer() is in scope");
+                assert (typeof inner==='function', "inner() is in scope");
+                assert (typeof a==='number', "a is in scope");
+                assert (typeof b==='number', "b is in scope");
+                assert (typeof c==='number', "c is in scope");
+
+                function inner () {/* does nothing*/}
+
+                var b = 2;
+
+                if (a ==1) {
+                    var c= 3;
+                }
+            };
+
+
+
+            window.onload = function() {
+                assert(true, "The test suite is running.");
+                assert(false, "Fail!");
+                assert (true, "-----BEFORE OUTER-----");
+                assert (typeof outer==='function', "outer() is in scope");
+                assert (typeof inner==='function', "inner() is in scope");
+                assert (typeof a==='number', "a is in scope");
+                assert (typeof b==='number', "b is in scope");
+                assert (typeof c==='number', "c is in scope");
+                outer();
+            };
+        </script>
+
+        <style>
+            #results li.pass {color: green;}
+            #results li.fail {color: red;}
+        </style>
+     </head>
+
+     <body>
+         Test Suite
+         <ul id="results"></ul>
+     </body>
+</html>
